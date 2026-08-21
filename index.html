@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una rosa para ti</title>
+
+    <!-- GSAP core (animaciones) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- ScrollTrigger cargado por si se desea extender la escena, no se usa scroll aquí -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Capa oscura que se intensifica al iniciar la animación -->
+    <div id="overlay"></div>
+
+    <!-- Resplandor rojo central detrás de la rosa -->
+    <div id="glow"></div>
+
+    <!-- Escenario donde vive la rosa: tallo, hojas, capullo, pétalos, estambres y partículas -->
+    <div id="rose-container" aria-hidden="true">
+        <div id="stem"></div>
+        <div id="leaves"></div>
+        <div id="bud"></div>
+        <div id="petals"></div>
+        <div id="stamens"></div>
+        <div id="particles"></div>
+    </div>
+
+    <!-- Tarjeta con el mensaje y el control principal -->
+    <div id="card">
+        <div class="card-badge" aria-hidden="true">♡</div>
+        <p class="eyebrow">Danielita ♡</p>
+        <h1 id="title">Gracias por ser mi mejor amiga</h1>
+        <p id="subtitle">Toca el botón y observa cómo florece</p>
+
+        <div id="progress-track">
+            <div id="progress-fill"></div>
+        </div>
+
+        <button id="bloom-btn" type="button">Florecer</button>
+    </div>
+
+    <!-- Mensaje final que aparece cuando la rosa termina de abrirse -->
+    <div id="final-msg">Para ti <span class="heart">❤</span></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

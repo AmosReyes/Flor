@@ -1,0 +1,356 @@
+/* ============================================================
+   Love.css — estilos base
+   Paleta: negro profundo + rojos aterciopelados + un toque dorado
+   ============================================================ */
+
+:root {
+    --bg: #f6dce8;
+    --card-bg: rgba(255, 255, 255, 0.14);
+    --rose-deep: #4a0a12;
+    --rose-mid: #8c101f;
+    --rose-bright: #d81e35;
+    --rose-highlight: #ff5f6d;
+    --leaf-deep: #288535;
+    --leaf-bright: #1f4d24;
+    --gold: #d8a13a;
+    --text: #7c3155;
+    --text-dim: #a85d7b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    background: var(--bg);
+    overflow: hidden;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f7dce9 0%, #efc5d8 52%, #f9e7ef 100%);
+}
+
+/* ---------- Overlay y resplandor ---------- */
+
+#overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 0%, rgba(133, 53, 89, 0.14) 100%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+#glow {
+    position: fixed;
+    bottom: calc(5vh + 60px);
+    left: 50%;
+    width: 60vmin;
+    height: 60vmin;
+    transform: translate(-50%, 50%) scale(0.6);
+    background: radial-gradient(circle, rgba(216, 30, 53, 0.55) 0%, rgba(216, 30, 53, 0.18) 40%, rgba(216, 30, 53, 0) 70%);
+    filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ---------- Escenario de la rosa ---------- */
+
+#rose-container {
+    position: fixed;
+    bottom: 5vh;
+    left: 50%;
+    width: 1px;
+    height: 1px;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+#stem {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 10px;
+    height: 0px;
+    /* animado por GSAP */
+    transform: translateX(-50%);
+    background: linear-gradient(to top, var(--leaf-deep), var(--leaf-bright));
+    border-radius: 6px;
+    box-shadow: 0 0 12px rgba(31, 77, 36, 0.5);
+    transform-origin: bottom center;
+}
+
+#leaves {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+}
+
+.leaf {
+    position: absolute;
+    width: 46px;
+    height: 26px;
+    background: linear-gradient(135deg, var(--leaf-bright), var(--leaf-deep));
+    border-radius: 0% 100% 0% 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4) inset;
+    opacity: 0;
+    transform-origin: left center;
+}
+
+#bud {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 26px;
+    height: 34px;
+    transform: translate(-50%, 0) scale(0);
+    border-radius: 45% 45% 50% 50% / 60% 60% 40% 40%;
+    background: linear-gradient(180deg, var(--rose-mid), var(--rose-deep));
+    box-shadow: 0 0 22px rgba(216, 30, 53, 0.35);
+    transform-origin: center bottom;
+    z-index: 4;
+}
+
+#petals {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    z-index: 5;
+}
+
+.petal {
+    position: absolute;
+    width: 60px;
+    height: 78px;
+    left: 0;
+    top: 0;
+    border-radius: 50% 50% 44% 44% / 62% 62% 38% 38%;
+    background: linear-gradient(200deg, var(--rose-highlight) 0%, var(--rose-bright) 35%, var(--rose-mid) 70%, var(--rose-deep) 100%);
+    box-shadow:
+        inset -6px -8px 14px rgba(0, 0, 0, 0.45),
+        inset 6px 6px 10px rgba(255, 150, 150, 0.15),
+        0 4px 10px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transform-origin: 50% 100%;
+    will-change: transform, opacity;
+}
+
+#stamens {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    z-index: 6;
+}
+
+.stamen {
+    position: absolute;
+    width: 3px;
+    height: 14px;
+    background: linear-gradient(to top, var(--gold), #fff3c4);
+    border-radius: 2px;
+    opacity: 0;
+    box-shadow: 0 0 6px rgba(216, 161, 58, 0.7);
+}
+
+.stamen::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -1.5px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 6px rgba(216, 161, 58, 0.9);
+}
+
+#particles {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    z-index: 7;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffd9d9 0%, rgba(216, 30, 53, 0.6) 60%, rgba(216, 30, 53, 0) 100%);
+    opacity: 0;
+}
+
+/* ---------- Tarjeta ---------- */
+
+#card {
+    position: relative;
+    z-index: 10;
+    width: min(90vw, 380px);
+    padding: 54px 32px 32px;
+    text-align: center;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.86);
+    border-radius: 0;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 18px 42px rgba(143, 62, 99, 0.16);
+}
+
+.card-badge {
+    position: absolute;
+    top: -27px;
+    left: 50%;
+    display: grid;
+    width: 54px;
+    height: 54px;
+    place-items: center;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: #df7fa6;
+    color: #fff4f8;
+    font-size: 1.8rem;
+    box-shadow: 0 5px 16px rgba(151, 59, 98, 0.2);
+}
+
+.eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #bd6286;
+    margin-bottom: 14px;
+    font-family: Georgia, serif;
+    font-style: italic;
+}
+
+#title {
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+}
+
+#subtitle {
+    font-size: 0.92rem;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+    font-style: italic;
+}
+
+#progress-track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 190, 214, 0.18);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 28px;
+}
+
+#progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--rose-deep), var(--rose-bright), var(--rose-highlight));
+    border-radius: 4px;
+}
+
+#bloom-btn {
+    position: relative;
+    overflow: hidden;
+    padding: 14px 30px;
+    font-family: Georgia, serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff8fb;
+    background: #df7fa6;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 20px rgba(151, 59, 98, 0.2);
+}
+
+#bloom-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(216, 30, 53, 0.4);
+}
+
+#bloom-btn:active {
+    transform: translateY(0px) scale(0.97);
+}
+
+#bloom-btn:disabled {
+    cursor: default;
+    opacity: 0.75;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(0);
+    pointer-events: none;
+}
+
+/* ---------- Mensaje final ---------- */
+
+#final-msg {
+    position: fixed;
+    top: 14%;
+    left: 50%;
+    transform: translate(-50%, -20px) scale(0.8);
+    z-index: 11;
+    font-size: 1.6rem;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    opacity: 0;
+    text-align: center;
+    text-shadow: 0 0 20px rgba(216, 30, 53, 0.6);
+    pointer-events: none;
+}
+
+.heart {
+    color: var(--rose-highlight);
+    display: inline-block;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 480px) {
+    #card {
+        padding: 32px 22px;
+    }
+
+    #title {
+        font-size: 1.4rem;
+    }
+
+    #final-msg {
+        font-size: 1.25rem;
+        top: 10%;
+    }
+}
+
+@media (max-height: 640px) {
+    #final-msg {
+        top: 8%;
+    }
+}
